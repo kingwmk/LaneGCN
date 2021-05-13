@@ -609,7 +609,7 @@ class PredNet(nn.Module):
         for i in range(len(actor_idcs)):
             idcs = actor_idcs[i]
             ctrs = actor_ctrs[i].view(-1, 1, 1, 2)
-            reg[idcs] = reg[idcs] + ctrs
+            reg[idcs] = torch.cumsum(reg[idcs], dim=2) + ctrs
 
         dest_ctrs = reg[:, :, -1].detach()
         feats = self.att_dest(actors, torch.cat(actor_ctrs, 0), dest_ctrs)
