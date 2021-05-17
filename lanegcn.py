@@ -628,6 +628,8 @@ class PredNet(nn.Module):
             ctrs = actor_ctrs[i].view(-1, 1, 1, 2)
             out["cls"].append(cls[idcs])
             out["reg"].append(reg[idcs])
+            print(reg[idcs])
+            print(cls[idcs])
         return out
 
 
